@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('location');
+            $table->float('price')->unsigned();
             $table->string('duration');
             $table->tinyInteger('available_slots')->unsigned();
             $table->text('description');
