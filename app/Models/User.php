@@ -46,3 +46,33 @@ class User extends Authenticatable
         ];
     }
 }
+
+
+
+Schema::create('events', function (Blueprint $table) {
+    $table->id();
+    $table->string('title');
+    $table->string('location');
+    $table->string('duration');
+    $table->tinyInteger('available_slots')->unsigned();
+    $table->text('description');
+    $table->string('main_photo_path');
+    $table->tinyInteger('difficulty')->unsigned();
+    $table->date('beginning_date');
+    $table->date('ending_date');
+    $table->tinyInteger('max_group_size')->unsigned();
+    $table->enum('status', allowed: Event::$status)->default('open');
+    $table->string('coordinates');
+    $table->string('slug')->unique();
+
+    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    $table->timestamps();
+});
+
+Schema::create('event_photo', function (Blueprint $table) {
+    $table->id();
+    $table->string('url')->unique();
+
+    $table->
+    $table->timestamps();
+});
