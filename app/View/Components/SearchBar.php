@@ -1,18 +1,19 @@
 <?php
 
-namespace App\View\Components\layouts;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class layout extends Component
+class SearchBar extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
+    public function __construct(
+        public ?string $placeholder = null,
+    ) {
         //
     }
 
@@ -21,6 +22,6 @@ class layout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layouts.layout');
+        return view('components.search-bar');
     }
 }

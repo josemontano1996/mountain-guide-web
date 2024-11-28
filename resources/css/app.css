@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.primary-btn {
+    @apply bg-indigo-500 text-white px-4 py-2 rounded text-center hover:bg-indigo-400;
+}
