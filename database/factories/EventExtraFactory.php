@@ -17,7 +17,9 @@ class EventExtraFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->title,
+            'description' => fake()->text(100),
+            'price' => fake()->numberBetween(10, 1_000)
         ];
     }
 }

@@ -17,7 +17,8 @@ class EventMapFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->title,
+            'image_path' => asset('images/mapa.jpg')
         ];
     }
 }

@@ -17,7 +17,7 @@ class EventNotIncludedFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'description' => fake()->text
         ];
     }
 }

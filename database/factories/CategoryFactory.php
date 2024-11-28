@@ -17,7 +17,14 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
         ];
+    }
+
+    public function isMain(): self
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_main' => true,
+        ]);
     }
 }

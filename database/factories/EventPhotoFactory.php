@@ -17,7 +17,7 @@ class EventPhotoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'image_path' => asset('images/pexels-tobiasbjorkli-1559825.jpg')
         ];
     }
 }
