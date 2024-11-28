@@ -16,7 +16,6 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_main')->nullable();
             $table->string('title');
             $table->string('location');
             $table->string('duration');
