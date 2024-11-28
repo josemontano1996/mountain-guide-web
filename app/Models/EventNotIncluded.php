@@ -9,4 +9,9 @@ class EventNotIncluded extends Model
 {
     /** @use HasFactory<\Database\Factories\EventNotIncludedFactory> */
     use HasFactory;
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

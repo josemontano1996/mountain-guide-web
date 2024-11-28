@@ -9,4 +9,9 @@ class Country extends Model
 {
     /** @use HasFactory<\Database\Factories\CountryFactory> */
     use HasFactory;
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

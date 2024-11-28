@@ -9,4 +9,9 @@ class Region extends Model
 {
     /** @use HasFactory<\Database\Factories\RegionFactory> */
     use HasFactory;
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
