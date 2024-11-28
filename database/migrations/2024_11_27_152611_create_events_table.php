@@ -16,11 +16,11 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_main')->nullable();
             $table->string('title');
             $table->string('location');
-            $table->float('price')->unsigned();
             $table->string('duration');
-            $table->tinyInteger('available_slots')->unsigned();
+            $table->integer('available_slots')->unsigned()->nullable();
             $table->text('description');
             $table->string('main_photo_path');
             $table->tinyInteger('difficulty')->unsigned();

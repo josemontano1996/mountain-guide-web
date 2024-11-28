@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('to_day');
             $table->string('title');
             $table->text('description');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
 
             $table->foreignIdFor(Event::class)->constrained()->onDelete('cascade');
             $table->timestamps();
