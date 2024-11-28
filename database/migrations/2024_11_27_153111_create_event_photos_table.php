@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->id();
             $table->string('image_path');
 
-            $table->foreignIdFor(Event::class)->constrained()->onDelete('cascade');
+            // 0 N relationship with Event model
+            $table->foreignIdFor(Event::class)->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
