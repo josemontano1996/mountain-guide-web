@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('description');
             $table->float('price');
 
-            $table->foreignIdFor(Event::class)->constrained()->onDelete('cascade');
+            // 0 N relationship with Event model
+            $table->foreignIdFor(Event::class)->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

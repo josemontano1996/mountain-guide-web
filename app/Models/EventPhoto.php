@@ -9,4 +9,9 @@ class EventPhoto extends Model
 {
     /** @use HasFactory<\Database\Factories\EventPhotoFactory> */
     use HasFactory;
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }

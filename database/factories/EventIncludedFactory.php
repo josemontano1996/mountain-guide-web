@@ -17,7 +17,7 @@ class EventIncludedFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'description' => fake()->text
         ];
     }
 }

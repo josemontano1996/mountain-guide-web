@@ -9,4 +9,8 @@ class EventExtra extends Model
 {
     /** @use HasFactory<\Database\Factories\EventExtraFactory> */
     use HasFactory;
+
+    public function event(){
+        return $this->belongsTo(Event::class);
+    }
 }
