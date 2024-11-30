@@ -1,3 +1,10 @@
+{{--
+
+This is a Blade component that generates an SVG icon for closing ( X ) or dismissing an element.
+
+--}}
+
+
 <svg class="absolute top-3 right-3" fill="#000000" height="12px" width="12px" version="1.1" id="Capa_1"
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.775 460.775"
     xml:space="preserve">

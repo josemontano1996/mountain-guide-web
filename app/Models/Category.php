@@ -10,6 +10,11 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'is_main'
+    ];
+
     public function events()
     {
         return $this->hasMany(Event::class);

@@ -1,3 +1,14 @@
-<x-layouts.layout >
-    <video src="{{asset('videos/3577871-hd_1280_720_25fps (1).mp4')}}" autoplay loop="false" class="w-screen h-screen object-cover" ></video>
-</x-layouts.layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    @livewireStyles
+</head>
+<body x-data>
+<button x-on:click="alert('Hello World!')">Say Hi</button>
+@livewireScripts
+</body>
+</html>

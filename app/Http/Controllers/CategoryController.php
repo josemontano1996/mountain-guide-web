@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -14,6 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::orderBy('name', 'asc')->get();
 
+
         return view('category.index', ['categories' => $categories]);
     }
 
@@ -22,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -30,15 +33,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories,name,' . $request->get('name'),
+            'is_main' => 'nullable'
+        ]);
+        try {
+            Category::create($validatedData);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
+        } catch (Exception $e) {
+            Log::error('Error when deleting category', ['exception' => $e->getMessage()]);
+        }
+
+        return redirect()->route('category.index')->with('success', 'Categoría creada exitosamente.');
     }
 
     /**
@@ -46,7 +52,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', ['category' => $category]);
     }
 
     /**
@@ -54,7 +60,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories,name,' . $category->id,
+            'is_main' => 'nullable'
+        ]);
+
+        $category->update($validatedData);
+
+        return redirect()->route('category.index')->with('success', 'Categoria actualizada con éxito.');
     }
 
     /**
@@ -62,6 +75,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->deleteOrFail();
+        } catch (Exception $e) {
+            Log::error('Error when deleting category', ['category_id' => $category->id, 'exception' => $e->getMessage()]);
+            return redirect()->route('category.index')->withErrors('Error al eliminar la categoría.');
+        }
+
+        return redirect()->route('category.index')->with('success', 'Categoria eliminada con éxito.');
     }
 }
