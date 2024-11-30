@@ -20,11 +20,11 @@
             <h2 class="text-xl mb-4">Administración</h2>
             <nav>
                 <ul class="flex flex-col space-y-2">
-                    <li><a href="{{route('category.index')}}">Categorias</a></li>
-                    <li>Países</li>
-                    <li>Regiones</li>
-                    <li>Excursiones</li>
-                    <li>Información personal</li>
+                    <li><a href="{{route('admin.category.index')}}">Categorias</a></li>
+                    <li><a href="{{route('admin.country.index')}}">Países</a></li>
+                    <li><a href="{{route('admin.region.index')}}">Regiones</a></li>
+                    <li><a href="{{route('admin.event.index')}}">Excursiones</a></li>
+                    <li><a href="#">Información personal</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,7 +33,8 @@
 
     <main class="w-full mt-12 max-w-[720px] mx-auto">
         @if (session("success"))
-        <div role="alert" class="my-8 rounded-md border-l-4 border-green-300 bg-green-100 p-4 text-green-700 opacity-75">
+        <div role="alert"
+            class="my-8 rounded-md border-l-4 border-green-300 bg-green-100 p-4 text-green-700 opacity-75">
             <p class="font-bold">Success!</p>
             <p>{{ session("success") }}</p>
         </div>
@@ -46,4 +47,5 @@
         {{$slot}}
     </main>
 </body>
+
 </html>

@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Log;
 
-class CategoryController extends Controller
+class AdminCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::categoriesWithEventCount()->orderBy('name', 'desc')->get();
+        $categories = Category::categoriesWithEventCount()->orderBy('name', 'asc')->get();
 
 
-        return view('category.index', ['categories' => $categories]);
+        return view('admin/category.index', ['categories' => $categories]);
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('admin/category.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class CategoryController extends Controller
             Log::error('Error when deleting category', ['exception' => $e->getMessage()]);
         }
 
-        return redirect()->route('category.index')->with('success', 'Categoría creada exitosamente.');
+        return redirect()->route('admin.category.index')->with('success', 'Categoría creada exitosamente.');
     }
 
     /**
@@ -52,7 +53,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('category.edit', ['category' => $category]);
+        return view('admin/category.edit', ['category' => $category]);
     }
 
     /**
@@ -67,7 +68,7 @@ class CategoryController extends Controller
 
         $category->update($validatedData);
 
-        return redirect()->route('category.index')->with('success', 'Categoria actualizada con éxito.');
+        return redirect()->route('admin.category.index')->with('success', 'Categoria actualizada con éxito.');
     }
 
     /**
@@ -79,9 +80,9 @@ class CategoryController extends Controller
             $category->deleteOrFail();
         } catch (Exception $e) {
             Log::error('Error when deleting category', ['category_id' => $category->id, 'exception' => $e->getMessage()]);
-            return redirect()->route('category.index')->withErrors('Error al eliminar la categoría.');
+            return redirect()->route('admin.category.index')->withErrors('Error al eliminar la categoría.');
         }
 
-        return redirect()->route('category.index')->with('success', 'Categoria eliminada con éxito.');
+        return redirect()->route('admin.category.index')->with('success', 'Categoria eliminada con éxito.');
     }
 }

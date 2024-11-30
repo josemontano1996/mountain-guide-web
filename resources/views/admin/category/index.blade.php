@@ -22,7 +22,7 @@
                     <th class="p-4 font-normal leading-none text-slate-500">Nombre</th>
                     <th class="p-4 font-normal leading-none text-slate-500">Principal</th>
                     <th class="p-4 font-normal leading-none text-slate-500">Nº eventos</th>
-                    <th colspan="2" class="primary-btn"><a href="{{ route('category.create') }}">Crear nueva
+                    <th colspan="2" class="primary-btn"><a href="{{ route('admin.category.create') }}">Crear nueva
                             categoría</a></th>
                 </tr>
             </thead>
@@ -40,10 +40,10 @@
                             <p class="text-slate-500">{{ $category->events_count}}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <x-link href="{{route('category.edit', $category)}}">Edit</x-link>
+                            <x-link href="{{route('admin.category.edit', $category)}}">Edit</x-link>
                         </td>
                         <td class="border-b border-slate-200 py-5 p-4">
-                            <form class="text-slate-500" action="{{route('category.destroy', $category)}}"
+                            <form class="text-slate-500" action="{{route('admin.category.destroy', $category)}}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
