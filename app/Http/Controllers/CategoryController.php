@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::categoriesWithEventCount()->orderBy('name', 'desc')->get();
 
 
         return view('category.index', ['categories' => $categories]);

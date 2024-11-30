@@ -37,7 +37,7 @@
                             <p class="text-slate-500">{{ $category->is_main ? 'Si' : 'No' }}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <p class="text-slate-500">{{ $category->events->count() }}</p>
+                            <p class="text-slate-500">{{ $category->events_count}}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
                             <x-link href="{{route('category.edit', $category)}}">Edit</x-link>
