@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->enum('status', allowed: Event::$status)->default('open');
             $table->string('coordinates');
             $table->string('slug')->unique();
+            $table->boolean('display')->nullable()->default('true');
+
 
             $table->foreignIdFor(Category::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Country::class)->constrained()->onDelete('cascade');

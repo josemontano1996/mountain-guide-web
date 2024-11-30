@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         $regions = Region::all()->shuffle();
 
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $event = Event::factory()->create([
                 'category_id' => $categories->random()->id,
                 'country_id' => $countries->random()->id,

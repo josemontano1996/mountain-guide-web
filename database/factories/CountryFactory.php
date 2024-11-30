@@ -18,6 +18,8 @@ class CountryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->country,
+            'display' => true,
+
         ];
     }
 }

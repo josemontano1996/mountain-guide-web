@@ -31,6 +31,8 @@ class EventFactory extends Factory
             'status' => $this->faker->randomElement(Event::$status),
             'coordinates' => $this->faker->latitude . ',' . $this->faker->longitude,
             'slug' => $this->faker->unique()->slug,
+            'display' => true,
+
         ];
     }
 }

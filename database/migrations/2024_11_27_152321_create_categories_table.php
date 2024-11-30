@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->unique();
             $table->boolean('is_main')->nullable();
+            $table->boolean('display')->nullable()->default('true');
 
             $table->timestamps();
 
