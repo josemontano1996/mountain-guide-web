@@ -56,6 +56,7 @@
             <p>{{ session("error") }}</p>
         </div>
         @endif
+        <x-breadcrumps :links="$links" class="mb-6" />
         {{$slot}}
         @livewireScripts
     </main>

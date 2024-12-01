@@ -23,6 +23,6 @@ class Link extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.link');
+        return view('components.ui.link');
     }
 }

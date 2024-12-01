@@ -1,6 +1,6 @@
 <div class="relative">
     @if('textarea' !== $type)
-    @if ($formRef)
+    @isset ($formRef)
     <button class="absolute right-0 top-0 flex h-full items-center pr-2" type="button"
         @click="$refs['input-{{$name}}'].value=''; $refs['{{$formRef}}'].submit();" {{-- onclick="
         document.getElementById('{{ $name }}').value='';
@@ -13,11 +13,11 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
         </svg>
     </button>
-    @endif
+    @endisset
 
-    <input x-ref="input-{{$name}}" type="{{$type}}" placeholder="{{ $placeholder }}" name="{{ $name }}"
-        value="{{ old($name, $value) }}" id="{{ $name }}" @if($type==="file" && $fileType) accept="{{ $fileType }}"
-        @endif @if($required) required @endif
+    <input x-ref="input-{{$name}}" type="{{$type}}" @isset($placeholder) placeholder="{{ $placeholder }}" @endisset
+        name="{{ $name }}" value="{{ old($name, $value) }}" id="{{ $name }}" @if($type==="file" && $fileType)
+        accept="{{ $fileType }}" @endif @isset($required) required @endisset
         @class([ 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
         , 'pr-8'=>$formRef,
     'ring-slate-300' =>!$errors->has($name),
