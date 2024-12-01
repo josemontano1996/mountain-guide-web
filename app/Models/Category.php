@@ -13,10 +13,11 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'is_main'
+        'is_main',
+        'display'
     ];
 
-    public function scopeCategoriesWithEventCount(Builder $query)
+    public function scopeWithEventCount(Builder $query)
     {
         $query->withCount('events');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AdminCountryController extends Controller
@@ -12,7 +13,10 @@ class AdminCountryController extends Controller
      */
     public function index()
     {
-        //
+
+        $countries = Country::withEventCount()->orderBy('name', 'asc')->get();
+
+        return view('admin.country.index', ['countries' => $countries]);
     }
 
     /**

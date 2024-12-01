@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$title ?? 'Admin'}}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Loading livewire because the prefetch links in nav bar need it --}}
+    @livewireStyles
     @isset($head)
     {{$head}}
     @endisset
@@ -20,11 +22,21 @@
             <h2 class="text-xl mb-4">Administración</h2>
             <nav>
                 <ul class="flex flex-col space-y-2">
-                    <li><a href="{{route('admin.category.index')}}">Categorias</a></li>
-                    <li><a href="{{route('admin.country.index')}}">Países</a></li>
-                    <li><a href="{{route('admin.region.index')}}">Regiones</a></li>
-                    <li><a href="{{route('admin.event.index')}}">Excursiones</a></li>
-                    <li><a href="#">Información personal</a></li>
+                    <li>
+                        <x-link href="{{route('admin.category.index')}}">Categorias</x-link>
+                    </li>
+                    <li>
+                        <x-link href="{{route('admin.country.index')}}">Países</x-link>
+                    </li>
+                    <li>
+                        <x-link href="{{route('admin.region.index')}}">Regiones</x-link>
+                    </li>
+                    <li>
+                        <x-link href="{{route('admin.event.index')}}">Excursiones</x-link>
+                    </li>
+                    <li>
+                        <x-link href="#">Información personal</x-link>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -45,6 +57,7 @@
         </div>
         @endif
         {{$slot}}
+        @livewireScripts
     </main>
 </body>
 

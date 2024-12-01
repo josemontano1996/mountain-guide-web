@@ -15,7 +15,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::categoriesWithEventCount()->orderBy('name', 'asc')->get();
+        $categories = Category::withEventCount()->orderBy('name', 'asc')->paginate(5);
 
 
         return view('admin/category.index', ['categories' => $categories]);
@@ -36,7 +36,8 @@ class AdminCategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name,' . $request->get('name'),
-            'is_main' => 'nullable'
+            'is_main' => 'nullable',
+            'display' => 'nullable'
         ]);
         try {
             Category::create($validatedData);
@@ -63,7 +64,8 @@ class AdminCategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:categories,name,' . $category->id,
-            'is_main' => 'nullable'
+            'is_main' => 'nullable',
+            'display' => 'nullable'
         ]);
 
         $category->update($validatedData);

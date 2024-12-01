@@ -1,8 +1,8 @@
 <x-layouts.admin-layout>
     <div class="flex justify-between items-center gap-12 mb-3">
         <div>
-            <h3 class="text-lg font-semibold text-slate-800">Administración de categorias</h3>
-            <p class="text-slate-500">{{ $categories->count() }} categorias encontradas.</p>
+            <h3 class="text-lg font-semibold text-slate-800">Administración de países</h3>
+            <p class="text-slate-500">{{ $countries->count() }} países encontrados.</p>
         </div>
         <div class="mx-3">
             {{-- TODO: añadir la búsqueda con livewire --}}
@@ -16,7 +16,6 @@
             <thead>
                 <tr class="border-b border-slate-300 bg-slate-50">
                     <th class="p-4 font-normal leading-none text-slate-500">Nombre</th>
-                    <th class="p-4 font-normal leading-none text-slate-500">Principal</th>
                     <th class="p-4 font-normal leading-none text-slate-500">Visible</th>
                     <th class="p-4 font-normal leading-none text-slate-500">Nº eventos</th>
                     <th colspan="2" class="primary-btn"><a href="{{ route('admin.category.create') }}">Crear nueva
@@ -24,26 +23,23 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($categories as $category)
-                <div wire:key='{{$category->id}}'>
+                @forelse ($countries as $country)
+                <div wire:key='{{$country->id}}'>
                     <tr class="hover:bg-slate-50">
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <p class="block font-semibold text-slate-800">{{ $category->name }}</p>
+                            <p class="block font-semibold text-slate-800">{{ $country->name }}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <p class="text-slate-500">{{ $category->is_main ? 'Si' : 'No' }}</p>
+                            <p class="text-slate-500">{{ $country->display ? 'Si' : 'No' }}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <p class="text-slate-500">{{ $category->display ? 'Si' : 'No' }}</p>
+                            <p class="text-slate-500">{{ $country->events_count}}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <p class="text-slate-500">{{ $category->events_count}}</p>
-                        </td>
-                        <td class="p-4 border-b border-slate-200 py-5">
-                            <x-link href="{{route('admin.category.edit', $category)}}">Edit</x-link>
+                            <x-link href="{{route('admin.country.edit', $country)}}">Edit</x-link>
                         </td>
                         <td class="border-b border-slate-200 py-5 p-4">
-                            <form class="text-slate-500" action="{{route('admin.category.destroy', $category)}}"
+                            <form class="text-slate-500" action="{{route('admin.country.destroy', $country)}}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -53,9 +49,10 @@
                     </tr>
                 </div>
                 @empty
-                <p>No existe ninguna categoría.</p>
+                <p>No existe ningun país.</p>
                 @endforelse
             </tbody>
         </table>
     </div>
+
 </x-layouts.admin-layout>
