@@ -10,22 +10,27 @@ class CategoriesTable extends Component
 {
     public Collection $categories;
 
+    public bool $hasSearched;
+
     public string $search;
 
 
     public function mount()
     {
+        $this->hasSearched = false;
         $this->search = '';
         $this->categories = Category::withEventCount()->orderBy('name', 'asc')->get();
     }
 
     public function search()
     {
+        $this->hasSearched = true;
         $this->categories = Category::withEventCount()->where('name', 'like', '%' . $this->search . '%')->orderBy('name', 'asc')->get();
     }
 
     public function clearSearch()
     {
+        $this->hasSearched = false;
         $this->search = '';
         $this->resetCategories();
     }
@@ -33,7 +38,12 @@ class CategoriesTable extends Component
     public function deleteCategory(Category $category)
     {
         $category->delete();
-        $this->resetCategories();
+
+        if ($this->search) {
+            $this->search();
+        } else {
+            $this->resetCategories();
+        }
 
     }
 
@@ -45,11 +55,13 @@ class CategoriesTable extends Component
     public function render()
     {
 
-
-        if (strlen($this->search > 0)) {
-            $this->categories = Category::withEventCount()->where('name', 'like', '%' . $this->search . '%')->orderBy('name', 'asc')->get();
+        if (strlen($this->search) > 0) {
+            $this->search();
         }
 
+        if (strlen($this->search) < 1 && $this->hasSearched) {
+            $this->resetCategories();
+        }
 
         return view('livewire.categories-table');
     }

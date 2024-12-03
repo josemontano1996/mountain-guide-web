@@ -10,11 +10,11 @@
     @livewireStyles
 </head>
 
-<body x-data>
+<body>
     <x-ui.modal.modal modalId="1">
         <h1>hola</h1>
     </x-ui.modal.modal>
-    <x-ui.modal.open-modal modalId="1" />
+    <x-ui.modal.open-modal/>
     @livewireScripts
 </body>
 
