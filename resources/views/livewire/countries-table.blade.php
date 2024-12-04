@@ -51,7 +51,8 @@
                             <x-link href="{{route('admin.country.edit', $country)}}">Editar</x-link>
                         </td>
                         <td class="border-b border-slate-200 py-5 p-4">
-                            <button wire:click="deleteCountry({{$country}})">Eliminar</button>
+                            <button wire:click="deleteCountry({{$country}})" wire:loading.attr='disabled'
+                                wire:target="deleteCountry">Eliminar</button>
                         </td>
                     </tr>
                 </div>

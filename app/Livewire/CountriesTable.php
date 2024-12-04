@@ -14,11 +14,11 @@ class CountriesTable extends Component
     public bool $hasSearched;
     public string $search;
 
-    public function mount()
+    public function mount(Collection $countries)
     {
         $this->hasSearched = false;
         $this->search = '';
-        $this->countries = Country::withEventCount()->orderBy('name', 'asc')->get();
+        $this->countries = $countries;
     }
 
     public function search()
@@ -27,7 +27,7 @@ class CountriesTable extends Component
         $this->countries = Country::withEventCount()->where('name', 'like', '%' . $this->search . '%')->orderBy('name', 'asc')->get();
     }
 
-    public function cleanSearch()
+    public function clearSearch()
     {
         $this->hasSearched = false;
         $this->search = '';

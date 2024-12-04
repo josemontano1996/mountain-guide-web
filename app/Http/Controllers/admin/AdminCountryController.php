@@ -16,7 +16,7 @@ class AdminCountryController extends Controller
     public function index()
     {
 
-        $countries = Country::all();
+        $countries = Country::withEventCount()->orderBy('name', 'asc')->get();
 
         return view('admin.country.index', ['countries' => $countries]);
     }
