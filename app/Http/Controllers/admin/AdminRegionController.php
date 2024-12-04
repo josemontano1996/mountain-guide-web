@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class AdminRegionController extends Controller
@@ -12,7 +13,8 @@ class AdminRegionController extends Controller
      */
     public function index()
     {
-        //
+        $regions = Region::withEventCount()->orderBy('name')->get();
+        return view('admin.region.index', compact('regions'));
     }
 
     /**
@@ -34,7 +36,7 @@ class AdminRegionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Region $region)
     {
         //
     }
@@ -42,7 +44,7 @@ class AdminRegionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Region $region)
     {
         //
     }
@@ -50,7 +52,7 @@ class AdminRegionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Region $region)
     {
         //
     }
@@ -58,7 +60,7 @@ class AdminRegionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Region $region)
     {
         //
     }

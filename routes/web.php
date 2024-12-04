@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 //Future protected admin routes
 Route::prefix('admin')->as('admin.')->group(function () {
-    Route::resource('category', AdminCategoryController::class)->except(['show']);
+    Route::resource('category', AdminCategoryController::class)->except('show');
 
     Route::resource('country', AdminCountryController::class)->except('show');
 

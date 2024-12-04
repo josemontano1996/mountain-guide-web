@@ -41,7 +41,8 @@ class CountriesTable extends Component
 
     public function deleteCountry(Country $country)
     {
-        $country->delete();
+        //TODO: handle error
+        $country->deleteOrFail();
 
         if ($this->search) {
             $this->search();
