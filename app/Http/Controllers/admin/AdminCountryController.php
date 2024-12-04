@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CountryRequest;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Log;
 
 class AdminCountryController extends Controller
 {
@@ -30,9 +32,20 @@ class AdminCountryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        //
+
+        try {
+
+            Country::createFromValidatedData($request->validated());
+            return redirect()->route('admin.country.index')->with('success', 'País creado exitosamente.');
+            
+        } catch (\Exception $e) {
+
+            Log::error('Error when deleting country', ['exception' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error guardando país');
+
+        }
     }
 
     /**

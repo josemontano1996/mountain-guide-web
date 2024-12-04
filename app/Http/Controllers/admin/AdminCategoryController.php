@@ -39,14 +39,18 @@ class AdminCategoryController extends Controller
             'is_main' => 'nullable',
             'display' => 'nullable'
         ]);
+
         try {
+
             Category::create($validatedData);
+            return redirect()->route('admin.category.index')->with('success', 'Categoría creada exitosamente.');
 
         } catch (Exception $e) {
-            Log::error('Error when deleting category', ['exception' => $e->getMessage()]);
-        }
 
-        return redirect()->route('admin.category.index')->with('success', 'Categoría creada exitosamente.');
+            Log::error('Error when deleting category', ['exception' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error guardando categoría');
+
+        }
     }
 
     /**
