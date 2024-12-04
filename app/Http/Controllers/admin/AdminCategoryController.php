@@ -16,7 +16,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withEventCount()->get();
+        $categories = Category::all();
 
 
         return view('admin/category.index', ['categories' => $categories]);
@@ -36,8 +36,8 @@ class AdminCategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-
             Category::createFromValidatedData($request->validated());
+
             return redirect()->route('admin.category.index')->with('success', 'Categoría creada exitosamente.');
 
         } catch (Exception $e) {
@@ -62,8 +62,12 @@ class AdminCategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         try {
+            $success = Category::updateFromValidatedData($category, $request->validated());
 
-            Category::updateFromValidatedData($category, $request->validated());
+            if (!$success) {
+                return redirect()->back()->with('error', 'Instancia de categoría no actualizada.');
+            }
+
             return redirect()->route('admin.category.index')->with('success', 'Categoría editada exitosamente.');
 
         } catch (Exception $e) {
@@ -81,9 +85,12 @@ class AdminCategoryController extends Controller
     {
         try {
             $category->deleteOrFail();
+
             return redirect()->route('admin.category.index')->with('success', 'Categoria eliminada con éxito.');
         } catch (Exception $e) {
+
             Log::error('Error when deleting category', ['category_id' => $category->id, 'exception' => $e->getMessage()]);
+
             return redirect()->route('admin.category.index')->withErrors('Error al eliminar la categoría.');
         }
 
