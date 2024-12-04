@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class CategoriesTable extends Component
@@ -37,12 +39,20 @@ class CategoriesTable extends Component
 
     public function deleteCategory(Category $category)
     {
-        $category->delete();
+        try {
+            $category->deleteOrFail();
 
-        if ($this->search) {
-            $this->search();
-        } else {
-            $this->resetCategories();
+            if ($this->search) {
+                $this->search();
+            } else {
+                $this->resetCategories();
+            }
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('admin.region.index')->with('error', 'La instancia ya fue eliminada.');
+
+        } catch (Exception $e) {
+            return redirect()->route('admin.region.index')->with('error', 'Ha ocurrido un error inesperado.');
         }
 
     }

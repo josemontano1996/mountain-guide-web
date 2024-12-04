@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Country;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Livewire\Component;
 
 class CountriesTable extends Component
@@ -41,13 +43,20 @@ class CountriesTable extends Component
 
     public function deleteCountry(Country $country)
     {
-        //TODO: handle error
-        $country->deleteOrFail();
+        try {
+            $country->deleteOrFail();
 
-        if ($this->search) {
-            $this->search();
-        } else {
-            $this->resetCountries();
+            if ($this->search) {
+                $this->search();
+            } else {
+                $this->resetCountries();
+            }
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('admin.region.index')->with('error', 'La instancia ya fue eliminada.');
+
+        } catch (Exception $e) {
+            return redirect()->route('admin.region.index')->with('error', 'Ha ocurrido un error inesperado.');
         }
     }
     public function render()
