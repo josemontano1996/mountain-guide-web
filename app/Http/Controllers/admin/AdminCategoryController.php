@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withEventCount()->orderBy('name', 'asc')->get();
+        $categories = Category::withEventCount()->get();
 
 
         return view('admin/category.index', ['categories' => $categories]);
@@ -32,17 +33,11 @@ class AdminCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:categories,name,' . $request->get('name'),
-            'is_main' => 'nullable',
-            'display' => 'nullable'
-        ]);
-
         try {
 
-            Category::create($validatedData);
+            Category::createFromValidatedData($request->validated());
             return redirect()->route('admin.category.index')->with('success', 'Categoría creada exitosamente.');
 
         } catch (Exception $e) {
@@ -64,17 +59,19 @@ class AdminCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:categories,name,' . $category->id,
-            'is_main' => 'nullable',
-            'display' => 'nullable'
-        ]);
+        try {
 
-        $category->update($validatedData);
+            Category::updateFromValidatedData($category, $request->validated());
+            return redirect()->route('admin.category.index')->with('success', 'Categoría editada exitosamente.');
 
-        return redirect()->route('admin.category.index')->with('success', 'Categoria actualizada con éxito.');
+        } catch (Exception $e) {
+
+            Log::error('Error when deleting category', ['exception' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Error editando categoría');
+
+        }
     }
 
     /**
@@ -84,11 +81,11 @@ class AdminCategoryController extends Controller
     {
         try {
             $category->deleteOrFail();
+            return redirect()->route('admin.category.index')->with('success', 'Categoria eliminada con éxito.');
         } catch (Exception $e) {
             Log::error('Error when deleting category', ['category_id' => $category->id, 'exception' => $e->getMessage()]);
             return redirect()->route('admin.category.index')->withErrors('Error al eliminar la categoría.');
         }
 
-        return redirect()->route('admin.category.index')->with('success', 'Categoria eliminada con éxito.');
     }
 }
