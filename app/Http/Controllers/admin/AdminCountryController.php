@@ -24,7 +24,7 @@ class AdminCountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.country.create');
     }
 
     /**

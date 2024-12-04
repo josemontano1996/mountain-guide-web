@@ -1,5 +1,4 @@
-<x-layouts.admin-layout
-    :links="[ 'Categorías'=> route('admin.category.index'), 'Crear nueva categoría' =>route('admin.category.create')]">
+<x-layouts.admin-layout :links="[ 'Categorías'=> route('admin.category.index'), 'Crear nueva categoría' =>'#']">
     <form action="{{route('admin.category.store')}}" method="POST" class="w-[500px]">
         @csrf
 
@@ -7,18 +6,18 @@
 
         <div class="mb-4">
             <x-ui.label for="name">Nombre</x-ui.label>
-            <x-text-input name="name" type='text' required />
+            <x-ui.text-input name="name" type='text' required />
         </div>
         <div class="mb-4">
             <div class="flex space-x-4">
-                <x-ui.label for="is_main" class="mb-0">Visible</x-ui.label>
+                <x-ui.label for="display" class="mb-0">Visible</x-ui.label>
                 <div>
-                    <input type="radio" name="display" id="display" value="1" checked>
-                    <label for="display">Si</label>
+                    <input type="radio" name="display" id="display_true" value="1" checked>
+                    <label for="display_true">Si</label>
                 </div>
                 <div>
-                    <input type="radio" name="display" id="display" value="">
-                    <label for="display">No</label>
+                    <input type="radio" name="display" id="display_false" value="">
+                    <label for="display_false">No</label>
                 </div>
             </div>
             <span class="text-sm italic">(Categoría activa que debe enseñarse al usuario)</span>
@@ -35,7 +34,7 @@
                     <label for="is_main">No</label>
                 </div>
             </div>
-            <span class="text-sm italic">(Aparecera barra de navegacion principal)</span>
+            <span class="text-sm italic">(Aparecerá barra de navegacion principal)</span>
         </div>
         <button class="primary-btn">Guardar</button>
     </form>

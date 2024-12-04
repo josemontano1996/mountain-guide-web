@@ -1,3 +1,3 @@
-<x-layouts.admin-layout :links="[ 'Categorías'=> route('admin.category.index')]">
+<x-layouts.admin-layout :links="[ 'Categorías'=>'#']">
     @livewire('categories-table')
 </x-layouts.admin-layout>

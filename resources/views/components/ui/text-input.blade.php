@@ -35,9 +35,5 @@
             {{old($name, $value)}}
     </textarea>
     @endif
-    @error($name)
-    <div role="alert" class="mt-1 text-sm text-red-500">
-        {{$message}}
-    </div>
-    @enderror
+    <x-ui.form-error :name="$name" />
 </div>

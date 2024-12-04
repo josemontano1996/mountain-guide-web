@@ -53,7 +53,7 @@
                             <p class="text-slate-500">{{ $category->events_count}}</p>
                         </td>
                         <td class="p-4 border-b border-slate-200 py-5">
-                            <x-ui.link href="{{route('admin.category.edit', $category)}}">Editar</x-ui.link>
+                            <x-link href="{{route('admin.category.edit', $category)}}">Editar</x-link>
                         </td>
                         <td class="border-b border-slate-200 py-5 p-4">
                             <button wire:click="deleteCategory({{$category}})">Eliminar</button>

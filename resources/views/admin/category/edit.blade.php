@@ -1,4 +1,4 @@
-<x-layouts.admin-layout :links="[ 'Categorías'=> route('admin.category.index'), 'Editar categoría' =>route('admin.category.edit', $category)]">
+<x-layouts.admin-layout :links="[ 'Categorías'=> route('admin.category.index'), 'Editar categoría' =>'#']">
 
     <form action="{{route('admin.category.update', $category)}}" method="POST" class="w-[500px]">
         @csrf
@@ -7,20 +7,20 @@
 
         <div class="mb-4">
             <x-ui.label for="name">Nombre</x-ui.label>
-            <x-text-input :value="$category->name" name="name" required />
+            <x-ui.text-input :value="$category->name" name="name" required />
         </div>
         <div class="mb-4">
             <div class="flex space-x-4">
                 <x-ui.label for="is_main" class="mb-0">Visible</x-ui.label>
                 <div>
-                    <input type="radio" name="display" id="display" value="1" @if($category->display) checked
+                    <input type="radio" name="display" id="display_true" value="1" @if($category->display) checked
                     @endif>
-                    <label for="display">Si</label>
+                    <label for="display_true">Si</label>
                 </div>
                 <div>
-                    <input type="radio" name="display" id="display" value="" @if(!$category->display) checked
+                    <input type="radio" name="display" id="display_false" value="" @if(!$category->display) checked
                     @endif>
-                    <label for="display">No</label>
+                    <label for="display_false">No</label>
                 </div>
             </div>
             <span class="text-sm italic">(Categoría activa que debe enseñarse al usuario)</span>
