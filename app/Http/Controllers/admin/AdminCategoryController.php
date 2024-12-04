@@ -16,7 +16,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withEventCount()->orderBy('name', 'asc')->get();
 
 
         return view('admin/category.index', ['categories' => $categories]);

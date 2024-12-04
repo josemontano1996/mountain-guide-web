@@ -15,11 +15,11 @@ class CategoriesTable extends Component
     public string $search;
 
 
-    public function mount()
+    public function mount(Collection $categories)
     {
         $this->hasSearched = false;
         $this->search = '';
-        $this->categories = Category::withEventCount()->orderBy('name', 'asc')->get();
+        $this->categories = $categories;
     }
 
     public function search()

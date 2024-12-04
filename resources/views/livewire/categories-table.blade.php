@@ -36,7 +36,7 @@
                             categoría</a></th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 @forelse ($categories as $category)
                 <div wire:key="{{$category->id}}">
                     <tr class="hover:bg-slate-50">
@@ -56,7 +56,8 @@
                             <x-link href="{{route('admin.category.edit', $category)}}">Editar</x-link>
                         </td>
                         <td class="border-b border-slate-200 py-5 p-4">
-                            <button wire:click="deleteCategory({{$category}})">Eliminar</button>
+                            <button wire:click="deleteCategory({{$category}})" wire:loading.attr='disabled'
+                                wire:target="deleteCategory">Eliminar</button>
                         </td>
                     </tr>
                 </div>
